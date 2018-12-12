@@ -2,7 +2,7 @@ product: '1.0.0'
 
 info:
   name: testapi1product
-  title: testapi1
+  title: TestProduct
   version: "1.0.0"
 
 apis:
