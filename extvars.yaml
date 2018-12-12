@@ -2,14 +2,14 @@
 swagger: '2.0'
 
 info:
-  name: testapi1
-  title: testapi1
+  name: anz_poc_weather_api1
+  title: anz_poc_weather_api1
   version: 1.0.0
 
 schemes:
     - https
 host: $(catalog.host)
-basePath: /v1/anz/poc
+basePath: /v1/anz/poc/weather
 
 consumes:
   - application/json
