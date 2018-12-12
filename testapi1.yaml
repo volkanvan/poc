@@ -1,0 +1,47 @@
+swagger: '2.0'
+
+info:
+  x-ibm-name: testapi1
+  title: testapi1
+  version: 1.0.0
+
+schemes:
+    - https
+host: $(catalog.host)
+basePath: /v1/anz/poc
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+securityDefinitions:
+ clientIdHeader:
+   type: apiKey
+   in: header
+   name: X-IBM-Client-Id
+
+security:
+ -
+   clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - proxy:
+          title: proxy
+          timeout: 60
+          verb: keep
+          cache-response: protocol
+          cache-ttl: 900
+          version: 1.0.0
+          secure-gateway: false
+          target-url: 'https://test.com.au'
+  gateway: datapower-gateway
+paths: {}
+definitions: {}
+tags: []
+
