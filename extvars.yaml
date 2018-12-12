@@ -2,8 +2,8 @@
 swagger: '2.0'
 
 info:
-  name: testapi
-  title: testapi
+  name: testapi1
+  title: testapi1
   version: 1.0.0
 
 schemes:
