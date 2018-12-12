@@ -8,11 +8,11 @@
       dest: /home/ec2-user/gitrepo
   - name: Read Config file
     include_vars:
-      file: extvars.yaml
+      file: "/home/ec2-user/gitrepo/{{ext_file}}"
   - name: Removing old files if any
-    command: "{{ item }}"
     args:
       chdir: "/home/ec2-user/gitrepo"
+    command: "{{ item }}"
     with_items:
     - rm {{info.name}}.yaml
     - rm {{info.name}}product.yaml
@@ -20,11 +20,11 @@
   - name: Create API definition.
     args:
       chdir: "/home/ec2-user/gitrepo"
-    command: apic create --type api --template api_template.hbs --name {{ info.name }} --title {{ info.title }} --version 1.0.0 --basepath /v1/anz/poc
+    command: apic create --type api --template api_template.hbs --name {{ info.name }} --title {{ info.title }} --version {{info.version}} --basepath {{basePath}}
   - name: Create Product definition.
     args:
       chdir: "/home/ec2-user/gitrepo"
-    command: apic create --type product --template product_template.hbs --apis {{ info.name }}.yaml --name {{ info.name }}product --title TestProduct --version 1.0.0
+    command: apic create --type product --template product_template.hbs --apis {{ info.name }}.yaml --name {{ info.name }}product --title {{info.title}} --version {{info.version}}
   - name: commit and push the files to the GIT repo
     command: "{{ item }}"
     args:
