@@ -11,13 +11,19 @@
       file: extvars.yaml
   - name: Removing old files if any
     command: "{{ item }}"
+    args:
+      chdir: "/home/ec2-user/gitrepo"
     with_items:
     - rm {{info.name}}.yaml
     - rm {{info.name}}product.yaml
     ignore_errors: True
   - name: Create API definition.
+    args:
+      chdir: "/home/ec2-user/gitrepo"
     command: apic create --type api --template api_template.hbs --name {{ info.name }} --title {{ info.title }} --version 1.0.0 --basepath /v1/anz/poc
   - name: Create Product definition.
+    args:
+      chdir: "/home/ec2-user/gitrepo"
     command: apic create --type product --template product_template.hbs --apis {{ info.name }}.yaml --name {{ info.name }}product --title TestProduct --version 1.0.0
   - name: commit and push the files to the GIT repo
     command: "{{ item }}"
