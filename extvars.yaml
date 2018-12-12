@@ -1,0 +1,17 @@
+---
+swagger: '2.0'
+
+info:
+  name: testapi
+  title: testapi
+  version: 1.0.0
+
+schemes:
+    - https
+host: $(catalog.host)
+basePath: /v1/anz/poc
+
+consumes:
+  - application/json
+produces:
+  - application/json

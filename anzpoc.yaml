@@ -1,0 +1,29 @@
+---
+- name: ANZ POC
+  hosts: all
+  tasks:
+  - name: Clone the GIT Repo
+    git:
+      repo: 'https://github.com/volkanvan/poc.git'
+      dest: /home/ec2-user/gitrepo
+  - name: Read Config file
+    include_vars:
+      file: extvars.yaml
+  - name: Removing old files if any
+    command: "{{ item }}"
+    with_items:
+    - rm {{info.name}}.yaml
+    - rm {{info.name}}product.yaml
+    ignore_errors: True
+  - name: Create API definition.
+    command: apic create --type api --template api_template.hbs --name {{ info.name }} --title {{ info.title }} --version 1.0.0 --basepath /v1/anz/poc
+  - name: Create Product definition.
+    command: apic create --type product --template product_template.hbs --apis {{ info.name }}.yaml --name {{ info.name }}product --title TestProduct --version 1.0.0
+  - name: commit and push the files to the GIT repo
+    command: "{{ item }}"
+    args:
+      chdir: "/home/ec2-user/gitrepo"
+    with_items:
+    - "git add ."
+    - "git commit -m {{info.name}} "
+    - "git push  https://smissam:gitrepo1234@github.com/volkanvan/poc.git master"
