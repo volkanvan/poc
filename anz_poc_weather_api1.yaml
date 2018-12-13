@@ -15,15 +15,6 @@ consumes:
 produces:
   - application/json
 
-securityDefinitions:
- clientIdHeader:
-   type: apiKey
-   in: header
-   name: X-IBM-Client-Id
-
-security:
- -
-   clientIdHeader: []
 x-ibm-configuration:
   testable: true
   enforced: true
@@ -41,7 +32,12 @@ x-ibm-configuration:
           secure-gateway: false
           target-url: 'https://samples.openweathermap.org/data/2.5/weather'
   gateway: datapower-gateway
-paths: {}
+paths:
+  /weather:
+    get:
+      responses:
+        '200':
+          description: 200 OK
 definitions: {}
 tags: []
 
