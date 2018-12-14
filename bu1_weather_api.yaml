@@ -1,0 +1,18 @@
+---
+swagger: '2.0'
+
+info:
+  name: anz_poc_weather_api1
+  title: anz_poc_weather_api1
+  version: 1.0.0
+  description: weather API Testing 123456
+
+schemes:
+    - https
+host: $(catalog.host)
+basePath: /v1/anz/poc
+
+consumes:
+  - application/json
+produces:
+  - application/json
